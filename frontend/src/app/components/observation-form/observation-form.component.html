@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{ isEditing ? "Modifier une observation" : "Ajouter une nouvelle observation" }}
+    </mat-card-title>
+  </mat-card-header>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="observation-form">
+    <mat-form-field class="full-width">
+      <mat-label>Date et Heure</mat-label>
+      <input matInput type="datetime-local" formControlName="date"/>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Latitude</mat-label>
+      <input matInput type="number" formControlName="latitude"/>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Longitude</mat-label>
+      <input matInput type="number" formControlName="longitude"/>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit">
+        <mat-icon>check</mat-icon>
+        {{ isEditing ? "Modifier" : "Créer" }}
+      </button>
+
+      <button mat-stroked-button color="warn" type="button" [routerLink]="['/animals']">
+        <mat-icon>arrow_back</mat-icon> Retour
+      </button>
+    </div>
+  </form>
+</mat-card>

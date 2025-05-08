@@ -1,0 +1,15 @@
+<mat-toolbar class="nav" color="primary">
+  <span>My Application</span>
+  <span class="example-spacer"></span>
+  <a mat-button routerLink="/about">About</a>
+  <a mat-button routerLink="/animals">Animals</a>
+  <a mat-button routerLink="/quiz">Quiz</a>
+  @if (auth.isAuthentified){
+    <button mat-button (click)="auth.logout()">
+        <mat-icon>logout</mat-icon>
+    Hello {{auth.email}} Se déconnecter
+    </button>
+  } @else {
+    <button mat-button routerLink="/login">Login</button>
+  }
+</mat-toolbar>

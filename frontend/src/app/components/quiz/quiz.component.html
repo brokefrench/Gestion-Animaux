@@ -1,0 +1,45 @@
+@if (question) {
+    <mat-card class="quiz-card">
+      <mat-card-header>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <span>{{ question }}</span>
+          <span style="white-space: nowrap;">
+            Streak actuelle: {{ streak }}
+          </span>
+        </div>
+      </mat-card-header>
+  
+      <mat-card-content>
+        <mat-nav-list>
+          @for (choice of choices; track choice) {
+            <mat-list-item>
+              <button mat-raised-button color="primary"
+                (click)="selectChoice(choice)"
+                [disabled]="showAnswer"
+                style="width: 100%; text-align: left;"
+              >
+                {{ choice }}
+              </button>
+            </mat-list-item>
+          }
+        </mat-nav-list>
+  
+        @if (showAnswer) {
+          <div style="margin-top: 20px;">
+            @if (selectedChoice === correct) {
+              <p style="color: green; font-weight: bold;">Correct!</p>
+            } @else {
+              <p style="color: red; font-weight: bold;">
+                Incorrect. The correct answer was: {{ correct }}
+              </p>
+            }
+  
+            <button mat-stroked-button color="accent" (click)="playAgain()" style="margin-top: 10px;">
+              Play Again
+            </button>
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+  }
+  

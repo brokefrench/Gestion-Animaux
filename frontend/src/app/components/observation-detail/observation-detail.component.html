@@ -1,0 +1,29 @@
+@let observation = observationObs | async;
+@if (observation !== null) {
+  <mat-card class="observation-card">
+    <mat-card-header>
+      <mat-card-title>Observation #{{ observation.id }}</mat-card-title>
+      <mat-card-subtitle>{{ observation.date }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p><strong>📍 Latitude :</strong> {{ observation.latitude }}</p>
+      <p><strong>📍 Longitude :</strong> {{ observation.longitude }}</p>
+      <p><strong>📝 Description :</strong> {{ observation.description }}</p>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" [routerLink]="['/animals']">
+        <mat-icon>arrow_back</mat-icon> Retour au menu
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <div class="map-wrapper">
+    <div #map id="map" style="height: 300px;"></div>
+  </div>  
+} @else {
+  <div class="loading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    <p>Chargement...</p>
+  </div>
+}

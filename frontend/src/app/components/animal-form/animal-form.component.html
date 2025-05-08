@@ -1,0 +1,43 @@
+<mat-card class="form-card">
+  <mat-card-title>
+    {{ isEditing ? "Modifier un animal" : "Ajouter un nouvel animal" }}
+  </mat-card-title>
+
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+      @for (field of ['nomCommun', 'nomSavant', 'embranchement', 'classe',
+      'ordre', 'sousOrdre', 'famille', 'genre', 'description']; track field) {
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>{{ field }}</mat-label>
+          <input matInput [formControlName]="field" />
+        </mat-form-field>
+      }
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Statut de conservation</mat-label>
+        <mat-select formControlName="statusConservation">
+          <mat-option value="EX">Éteint (EX)</mat-option>
+          <mat-option value="EW">Éteint à l'état sauvage (EW)</mat-option>
+          <mat-option value="CR">En danger critique (CR)</mat-option>
+          <mat-option value="EN">En danger (EN)</mat-option>
+          <mat-option value="VU">Vulnérable (VU)</mat-option>
+          <mat-option value="NT">Quasi menacé (NT)</mat-option>
+          <mat-option value="LC">Préoccupation mineure (LC)</mat-option>
+          <mat-option value="DD">Données insuffisantes (DD)</mat-option>
+          <mat-option value="NE">Non évalué (NE)</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit">
+          <mat-icon>check</mat-icon>
+          {{ isEditing ? "Modifier" : "Créer" }}
+        </button>
+
+        <button mat-stroked-button color="warn" type="button" [routerLink]="['/animals']">
+          <mat-icon>arrow_back</mat-icon> Retour
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

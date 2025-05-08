@@ -1,0 +1,38 @@
+.observation-card {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 10px;
+  }
+  
+  .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  mat-progress-spinner {
+    margin-bottom: 15px;
+  }
+
+  .map-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .map-wrapper {
+    display: flex;
+    justify-content: center; /* center horizontally */
+    margin-top: 20px;
+  }
+  
+  #map {
+    width: 500px;
+    height: 500px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* subtle shadow for nicer look */
+  }
+  
+  

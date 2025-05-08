@@ -1,0 +1,48 @@
+@let animals = animalsObs | async;
+<h2 class="page-title">🐾 Liste des animaux</h2>
+
+<mat-toolbar style="margin: 20px 0;">
+  <mat-icon>search</mat-icon>
+  <input matInput placeholder="Rechercher un animal..." [(ngModel)]="searchText" style="margin-left: 10px; width: 300px;">
+</mat-toolbar>
+
+@if (auth.isAuthentified && admin) {
+  <div class="actions">
+    <button mat-raised-button color="accent" [routerLink]="['/add-animal']">
+      <mat-icon>add</mat-icon> Ajouter un animal
+    </button>
+  </div>
+}
+
+<mat-list>
+  @for (animal of animals; track animal.id) {
+    @if (!searchText || (animal.nomCommun + ' ' + animal.nomSavant).toLowerCase().includes(searchText.toLowerCase())) {
+      <mat-list-item class="animal-item">
+        <div class="animal-content">
+          <div class="animal-info">
+            <span class="animal-name">{{ animal.nomCommun }}</span>
+            <span class="animal-scientific">({{ animal.nomSavant }})</span>
+          </div>
+
+          @if (auth.isAuthentified) {
+            <div class="animal-actions">
+              <button mat-icon-button color="primary" [routerLink]="['/animals', animal.id]" matTooltip="Voir">
+                <mat-icon>visibility</mat-icon>
+              </button>
+
+              @if (admin) {
+                <button mat-icon-button color="accent" [routerLink]="['/edit-animal', animal.id]" matTooltip="Modifier">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="warn" (click)="delete(animal.id!)" matTooltip="Supprimer">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </mat-list-item>
+    }
+  }
+</mat-list>
